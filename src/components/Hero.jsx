@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -26,6 +26,24 @@ const Subtitle = styled(motion.p)`
 `;
 
 const Hero = () => {
+  const [subtitle, setSubtitle] = useState('');
+  const fullSubtitle = "Frontend Developer & UI Designer";
+  const typingSpeed = 100; // Speed in milliseconds
+
+  useEffect(() => {
+    let index = 0;
+    const typingInterval = setInterval(() => {
+      if (index < fullSubtitle.length) {
+        setSubtitle((prev) => prev + fullSubtitle[index]);
+        index++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, typingSpeed);
+
+    return () => clearInterval(typingInterval); // Cleanup on unmount
+  }, []);
+
   return (
     <HeroSection>
       <HeroContent>
@@ -41,7 +59,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Frontend Developer & UI Designer
+          {subtitle}
         </Subtitle>
       </HeroContent>
     </HeroSection>
