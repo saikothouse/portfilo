@@ -85,7 +85,11 @@ const Projects = () => {
           >
             <ProjectImage src={project.owner.avatar_url} alt={project.name} />
             <ProjectInfo>
-              <ProjectTitle>{project.name}</ProjectTitle>
+              <ProjectTitle>
+                <a href={project.html_url} target="_blank" rel="noopener noreferrer">
+                  {project.name}
+                </a>
+              </ProjectTitle>
               <ProjectDescription>{project.description || 'No description available.'}</ProjectDescription>
             </ProjectInfo>
           </ProjectCard>
