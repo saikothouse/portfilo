@@ -1,10 +1,14 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom/client'; // Updated for React 18
+import App from './App';
+import './index.css'; // Import your global CSS styles
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
+// Create a root element for React 18
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// Render the App component
+root.render(
+  <React.StrictMode>
     <App />
-  </StrictMode>,
-)
+  </React.StrictMode>
+);
