@@ -49,9 +49,9 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('https://api.github.com/users/YOUR_USERNAME/repos', {
+        const response = await axios.get('https://api.github.com/users/saikothouse/repos', {
           headers: {
-            Authorization: `Bearer YOUR_PERSONAL_ACCESS_TOKEN`,
+            Authorization: `Bearer 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`,
           },
         });
         setProjects(response.data);
