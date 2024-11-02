@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { FaGithub, FaTwitter, FaLinkedin } from 'react-icons/fa';
 
 const ContactSection = styled.section`
   padding: 5rem 2rem;
@@ -55,6 +56,9 @@ const SocialLinks = styled.div`
 const SocialLink = styled.a`
   color: white;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   transition: color 0.2s ease;
 
   &:hover {
@@ -62,40 +66,57 @@ const SocialLink = styled.a`
   }
 `;
 
+const FooterSection = styled.footer`
+  background: #1e1e1e;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+`;
+
+const FooterText = styled.p`
+  margin: 0;
+  font-size: 1rem;
+`;
+
 const Contact = () => {
   return (
-    <ContactSection id="contact">
-      <ContactContainer>
-        <h2>Contact Me</h2>
-        <ContactForm
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Input type="text" placeholder="Name" />
-          <Input type="email" placeholder="Email" />
-          <TextArea placeholder="Message" />
-          <Button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            type="submit"
+    <>
+      <ContactSection id="contact">
+        <ContactContainer>
+          <h2>Contact Me</h2>
+          <ContactForm
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            Send Message
-          </Button>
-        </ContactForm>
-        <SocialLinks>
-          <SocialLink href="https://github.com/YOUR_USERNAME" target="_blank">
-            GitHub
-          </SocialLink>
-          <SocialLink href="https://twitter.com/YOUR_USERNAME" target="_blank">
-            Twitter
-          </SocialLink>
-          <SocialLink href="https://linkedin.com/in/YOUR_USERNAME" target="_blank">
-            LinkedIn
-          </SocialLink>
-        </SocialLinks>
-      </ContactContainer>
-    </ContactSection>
+            <Input type="text" placeholder="Name" />
+            <Input type="email" placeholder="Email" />
+            <TextArea placeholder="Message" />
+            <Button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              type="submit"
+            >
+              Send Message
+            </Button>
+          </ContactForm>
+          <SocialLinks>
+            <SocialLink href="https://github.com/YOUR_USERNAME" target="_blank">
+              <FaGithub /> GitHub
+            </SocialLink>
+            <SocialLink href="https://twitter.com/YOUR_USERNAME" target="_blank">
+              <FaTwitter /> Twitter
+            </SocialLink>
+            <SocialLink href="https://linkedin.com/in/YOUR_USERNAME" target="_blank">
+              <FaLinkedin /> LinkedIn
+            </SocialLink>
+          </SocialLinks>
+        </ContactContainer>
+      </ContactSection>
+      <FooterSection>
+        <FooterText>© {new Date().getFullYear()} Your Name. All rights reserved.</FooterText>
+      </FooterSection>
+    </>
   );
 };
 
