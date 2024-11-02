@@ -43,20 +43,26 @@ const ProjectDescription = styled.p`
   color: #666;
 `;
 
+const LoadingMessage = styled.p`
+  text-align: center;
+  font-size: 1.2rem;
+`;
+
 const Projects = () => {
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('https://api.github.com/users/saikothouse/repos', {
-          headers: {
-            Authorization: `Bearer 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`,
-          },
-        });
+        const response = await axios.get('https://api.github.com/users/saikothouse/repos');
         setProjects(response.data);
       } catch (error) {
+        setError('Error fetching projects. Please try again later.');
         console.error('Error fetching projects:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -66,6 +72,8 @@ const Projects = () => {
   return (
     <ProjectsSection id="projects">
       <h2>My Projects</h2>
+      {loading && <LoadingMessage>Loading projects...</LoadingMessage>}
+      {error && <LoadingMessage>{error}</LoadingMessage>}
       <ProjectsGrid>
         {projects.map((project) => (
           <ProjectCard
