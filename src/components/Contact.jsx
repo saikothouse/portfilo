@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { FaGithub, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import { FaGithub, FaTwitter, FaLinkedin, FaTelegram, FaFacebook, FaYoutube } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
 
 const ContactSection = styled.section`
   padding: 5rem 2rem;
@@ -79,19 +80,36 @@ const FooterText = styled.p`
 `;
 
 const Contact = () => {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_qm081rp', 'template_2h8r9vi', form.current, 'Vnw_CDBjz_JcOk2im')
+      .then((result) => {
+          console.log(result.text);
+          alert("Message sent successfully!");
+      }, (error) => {
+          console.log(error.text);
+          alert("Failed to send message, please try again.");
+      });
+  };
+
   return (
     <>
       <ContactSection id="contact">
         <ContactContainer>
           <h2>Contact Me</h2>
           <ContactForm
+            ref={form}
+            onSubmit={sendEmail}
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Input type="text" placeholder="Name" />
-            <Input type="email" placeholder="Email" />
-            <TextArea placeholder="Message" />
+            <Input type="text" name="user_name" placeholder="Name" required />
+            <Input type="email" name="user_email" placeholder="Email" required />
+            <TextArea name="message" placeholder="Message" required />
             <Button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -110,6 +128,15 @@ const Contact = () => {
             <SocialLink href="https://linkedin.com/in/YOUR_USERNAME" target="_blank">
               <FaLinkedin /> LinkedIn
             </SocialLink>
+            <SocialLink href="https://telegram.org/" target="_blank">
+              <FaTelegram /> Telegram
+            </SocialLink>
+            <SocialLink href="https://www.youtube.com/" target="_blank">
+              <FaYoutube /> YouTube
+            </SocialLink>
+            <SocialLink href="https://www.facebook.com/YOUR_USERNAME" target="_blank">
+              <FaFacebook /> Facebook
+            </SocialLink>
           </SocialLinks>
         </ContactContainer>
       </ContactSection>
@@ -120,4 +147,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+ export default Contact;
